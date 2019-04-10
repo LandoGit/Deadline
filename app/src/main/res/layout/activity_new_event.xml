@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewEventActivity"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/deadline_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deadline name"
+        android:textSize="24dp"/>
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_below="@id/deadline_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="01.04.2019"
+        android:textSize="24dp"
+        android:paddingLeft="8dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_deadline_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="save"
+        android:src="@drawable/baseline_done_24"/>
+</RelativeLayout>
