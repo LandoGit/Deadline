@@ -12,5 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HI LANDAWG"/>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HI LANDAWG"/>
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="HI LANDAWG"/>
 </LinearLayout>
