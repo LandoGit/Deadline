@@ -12,11 +12,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HI LANDAWG"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HI LANDAWG xD"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HI MOEHRI 2"/>
+
+
 
 
 </LinearLayout>
