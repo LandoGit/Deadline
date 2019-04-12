@@ -19,11 +19,10 @@ public class EventProvider extends ContentProvider {
     }
 
     public static final String LOG_TAG = EventProvider.class.getSimpleName();
-    private EventDbHelper mDbHelper;
+    private EventDbHelper mDbHelper = new EventDbHelper(getContext());
 
     @Override
     public boolean onCreate() {
-        mDbHelper = new EventDbHelper(getContext());
         return true;
     }
 
