@@ -8,14 +8,15 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton saveEventFab = findViewById(R.id.add_event_fab);
+    FloatingActionButton addEventFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        saveEventFab.setOnClickListener(new View.OnClickListener() {
+        addEventFab = findViewById(R.id.add_event_fab);
+        addEventFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, NewEventActivity.class));
