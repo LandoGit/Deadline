@@ -23,6 +23,13 @@ public class NewEventActivity extends AppCompatActivity {
         dateTV = findViewById(R.id.date_tv);
         saveEventFAB = findViewById(R.id.save_event_button);
 
+        // Setting displayed date to current date when starting the activity
+        Calendar calendar = Calendar.getInstance();
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        String currentDate = dayOfMonth + "." + month + "." + year;
+        dateTV.setText(currentDate);
 
         saveEventFAB = findViewById(R.id.add_event_fab);
         saveEventFAB.setOnClickListener(new View.OnClickListener() {
