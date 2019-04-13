@@ -30,11 +30,9 @@ public class NewEventActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         String currentDate = dayOfMonth + "." + month + "." + year;
         dateTV.setText(currentDate);
-
-        saveEventFAB = findViewById(R.id.save_event_fab);
     }
     public void saveFab(View v){
-        Intent intent = new Intent(this, NewEventActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
