@@ -21,7 +21,7 @@ public class NewEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_event);
 
         dateTV = findViewById(R.id.date_tv);
-        saveEventFAB = findViewById(R.id.save_event_button);
+        saveEventFAB = findViewById(R.id.save_event_fab);
 
         // Setting displayed date to current date when starting the activity
         Calendar calendar = Calendar.getInstance();
