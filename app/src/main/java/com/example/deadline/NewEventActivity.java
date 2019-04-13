@@ -32,11 +32,9 @@ public class NewEventActivity extends AppCompatActivity {
         dateTV.setText(currentDate);
 
         saveEventFAB = findViewById(R.id.add_event_fab);
-        saveEventFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NewEventActivity.this, MainActivity.class));
-            }
-        });
+    }
+    public void saveFab(View v){
+        Intent intent = new Intent(this, NewEventActivity.class);
+        startActivity(intent);
     }
 }
