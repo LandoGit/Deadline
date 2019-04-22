@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.deadline.data.EventContract.EventEntry;
 
 public class EventDbHelper extends SQLiteOpenHelper {
+
+    public static final String LOG_TAG = EventDbHelper.class.getSimpleName();
+
     private static final String DATABASE_NAME = "events.db";
 
     private static final int DATABASE_VERSION = 1;
@@ -18,12 +21,12 @@ public class EventDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_PETS_TABLE = "CREATE TABLE " + EventEntry.TABLE_NAME + " ("
+        String SQL_CREATE_EVENTS_TABLE = "CREATE TABLE " + EventEntry.TABLE_NAME + " ("
                 + EventEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EventEntry.COLUMN_EVENT_NAME + " TEXT NOT NULL, "
                 + EventEntry.COLUMN_EVENT_DATE + " TEXT NOT NULL);";
 
-        db.execSQL(SQL_CREATE_PETS_TABLE);
+        db.execSQL(SQL_CREATE_EVENTS_TABLE);
     }
 
 

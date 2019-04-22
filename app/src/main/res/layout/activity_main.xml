@@ -8,8 +8,9 @@
     tools:context=".MainActivity"
     android:padding="8dp">
 
-    <ListView
-        android:id="@+id/deadline_listview"
+
+    <TextView
+        android:id="@+id/events_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="8dp"
