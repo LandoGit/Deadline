@@ -16,8 +16,6 @@ public final class EventContract {
     public static final class EventEntry implements BaseColumns{
 
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_EVENTS);
-        public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY
-                + "/" + PATH_EVENTS;
         public final static String TABLE_NAME = "events";
 
         public final static String _ID = BaseColumns._ID;
@@ -25,5 +23,10 @@ public final class EventContract {
         public final static String COLUMN_EVENT_DATE = "date";
 
         public final static String TABLE_SORT_BY = "date ASC";
+
+        public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY
+                + "/" + PATH_EVENTS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_EVENTS;
     }
 }

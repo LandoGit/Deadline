@@ -59,7 +59,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             mDateTV.setText(currentDateString);
         }
 
-    private void saveEvent() {
+    private void insertEvent() {
         // Get data to Strings
         String nameString = mNameET.getText().toString().trim();
         String dateString = mDateTV.getText().toString();
@@ -73,9 +73,10 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             if (nameString.equals("")  && dateString != "Select Date") {
                 Toast.makeText(this, "Error with saving event", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Event saved" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
                 Uri newUri = getContentResolver().insert(EventEntry.CONTENT_URI, values);
             }
+
         }
 
 
@@ -83,7 +84,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
 
     public void saveFab(View v){
-        saveEvent();
+        insertEvent();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
