@@ -3,7 +3,7 @@ package com.example.deadline;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.deadline.Fragments.DatePickerFragment;
 import com.example.deadline.data.EventContract.EventEntry;
-import com.example.deadline.data.EventDbHelper;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -65,32 +64,21 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         String nameString = mNameET.getText().toString().trim();
         String dateString = mDateTV.getText().toString();
 
-        if (!nameString.equals("")  && dateString != "Select Date"){
-            EventDbHelper mDbHelper = new EventDbHelper(this);
-            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
 
             ContentValues values = new ContentValues();
             values.put(EventEntry.COLUMN_EVENT_NAME, nameString);
             values.put(EventEntry.COLUMN_EVENT_DATE, dateString);
 
-            long newRowId = db.insert(EventEntry.TABLE_NAME, null, values);
-
-            if (newRowId == -1) {
+            if (nameString.equals("")  && dateString != "Select Date") {
                 Toast.makeText(this, "Error with saving event", Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, the insertion was successful and we can display a toast with the row ID.
-                Toast.makeText(this, "Event saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Event saved" , Toast.LENGTH_SHORT).show();
+                Uri newUri = getContentResolver().insert(EventEntry.CONTENT_URI, values);
             }
-        } else {
-            Toast.makeText(this, "Event name and date required", Toast.LENGTH_SHORT).show();
         }
 
 
-
-
-
-
-    }
 
 
 

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.EventLog;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Perform a query on the pets table
-        Cursor cursor= db.query(
+       /** Cursor cursor= db.query(
                 EventEntry.TABLE_NAME,   // The table to query
                 projection,            // The columns to return
                 null,                  // The columns for the WHERE clause
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 null,                  // Don't group the rows
                 null,                  // Don't filter by row groups
                 null);                   // The sort order
+        */
+       Cursor cursor = getContentResolver().query(EventEntry.CONTENT_URI,
+               projection, null, null, null);
 
-        TextView displayView = findViewById(R.id.events_lv);
+       TextView displayView = findViewById(R.id.events_lv);
 
         try {
             // Create a header in the Text View that looks like this:
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             //
             // In the while loop below, iterate through the rows of the cursor and display
             // the information from each column in this order.
-            displayView.setText("The pets table contains " + cursor.getCount() + " events.\n\n");
+            displayView.setText("The events table contains " + cursor.getCount() + " events.\n\n");
             displayView.append(EventEntry._ID + " - " +
                     EventEntry.COLUMN_EVENT_NAME + " - " +
                     EventEntry.COLUMN_EVENT_DATE + "\n");
@@ -82,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 int currentID = cursor.getInt(idColumnIndex);
                 String currentName = cursor.getString(nameColumnIndex);
                 String currentDate = cursor.getString(dateColumnIndex);
-                // Display the values from each column of the current row in the cursor in the TextView
+                // Display the values from each column of the current row in the cursor in the
+                // TextView
                 displayView.append(("\n" + currentID + " - " +
                         currentName + " - " +
                         currentDate));

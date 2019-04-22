@@ -7,8 +7,11 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.deadline.data.EventContract.EventEntry;
+
+import static com.example.deadline.data.EventDbHelper.LOG_TAG;
 
 
 public class EventProvider extends ContentProvider {
@@ -61,9 +64,31 @@ public class EventProvider extends ContentProvider {
 
 
     @Override
-    public Uri insert( Uri uri, ContentValues values) {
-        return null;
+    public Uri insert( Uri uri, ContentValues contentValues)  {
+    SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+    int match = sUriMatcher.match(uri);
+    switch (match){
+        case EVENTS:
+            insertEvent(uri, contentValues);
+            return insertEvent(uri, contentValues);
+        default:
+            throw new IllegalArgumentException("Insertion is not supported for " + uri);
+        }
     }
+
+    private Uri insertEvent(Uri uri, ContentValues values){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        long id = db.insert(EventEntry.TABLE_NAME, null, values);
+
+        if (id == -1){
+            Log.e(LOG_TAG, "Failed to insert row for " +  uri);
+        }
+        return ContentUris.withAppendedId(uri, id);
+    }
+
+
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
