@@ -18,7 +18,12 @@ import com.example.deadline.Fragments.DatePickerFragment;
 import com.example.deadline.data.EventContract.EventEntry;
 
 import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class NewEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -27,6 +32,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     private TextView mDateTV;
     private FloatingActionButton mSaveEventFAB;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    String unifiedDateString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,8 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             c.set(Calendar.YEAR, year);
             c.set(Calendar.MONTH, month);
             c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            String currentDateString = DateFormat.getDateInstance().format(c.getTime());
+            int selectedMonth = month + 1;
+            String currentDateString = String.format("%02d.%02d.%02d", dayOfMonth, selectedMonth, year);
             mDateTV.setText(currentDateString);
         }
 
@@ -64,14 +71,24 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         String nameString = mNameET.getText().toString().trim();
         String dateString = mDateTV.getText().toString();
 
+            SimpleDateFormat sdfSource = new SimpleDateFormat("dd.mm.yyyy");
+        Date date = null;
+        try {
+            date = sdfSource.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        SimpleDateFormat sdfDatabase = new SimpleDateFormat("yyyy-mm-dd");
+            dateString = sdfDatabase.format(date);
 
             ContentValues values = new ContentValues();
             values.put(EventEntry.COLUMN_EVENT_NAME, nameString);
             values.put(EventEntry.COLUMN_EVENT_DATE, dateString);
 
             if (nameString.equals("")  && dateString != "Select Date") {
-                Toast.makeText(this, "Error with saving event", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Event name and date required", Toast.LENGTH_SHORT).show();
+                throw new IllegalArgumentException("Something went wrong");
             } else {
                 Toast.makeText(this, "Event saved", Toast.LENGTH_SHORT).show();
                 Uri newUri = getContentResolver().insert(EventEntry.CONTENT_URI, values);

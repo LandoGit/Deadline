@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.example.deadline.data.EventContract;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class EventCursorAdapter extends CursorAdapter {
 
     public EventCursorAdapter(Context context, Cursor c){
@@ -33,6 +37,17 @@ public class EventCursorAdapter extends CursorAdapter {
 
         String eventNameString = cursor.getString(eventNameIndex);
         String eventDateString = cursor.getString(eventDateIndex);
+
+        SimpleDateFormat sdfSource = new SimpleDateFormat("yyyy-mm-dd");
+        Date date = null;
+        try {
+            date = sdfSource.parse(eventDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat sdfDatabase = new SimpleDateFormat("dd.mm.yyyy");
+        eventDateString = sdfDatabase.format(date);
 
         // Populate fields with extracted properties
         eventNameTV.setText(eventNameString);
